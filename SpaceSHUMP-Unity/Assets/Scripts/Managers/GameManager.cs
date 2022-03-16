@@ -1,5 +1,5 @@
 /**** 
- * Created by: Akram Taghavi-Burrs
+ * Created by: Akram Taghavi-Burris
  * Date Created: Feb 23, 2022
  * 
  * Last Edited by: NA
@@ -8,7 +8,7 @@
  * Description: Basic GameManager Template
 ****/
 
-/** Import Libraries **/
+/** Using Namespaces **/
 using System; //C# library for system properties
 using System.Collections;
 using System.Collections.Generic;
