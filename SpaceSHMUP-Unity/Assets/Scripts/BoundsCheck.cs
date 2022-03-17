@@ -74,7 +74,7 @@ public class BoundsCheck : MonoBehaviour
         }
 
         //is the object on screen, depends if any one of the off bools are true, there by making isOnScreen false
-        isOnScreen = !(offRight || offLeft || offUp || offDown)
+        isOnScreen = !(offRight || offLeft || offUp || offDown);
 
         //if the object is to stay on screen but has moved off screen, move it back
         if(keepOnScreen && !isOnScreen)
