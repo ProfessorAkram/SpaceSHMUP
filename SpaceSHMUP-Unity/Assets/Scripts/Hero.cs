@@ -51,7 +51,8 @@ public class Hero : MonoBehaviour
     private GameObject lastTriggerGo; //reference to the last triggering game object
    
     [SerializeField] //show in inspector
-    private float _shieldLevel = 1; //level for sheilds
+    private float _shieldLevel = 1; //level for shields
+    public int maxShield = 4; //maximum shield level
     
     //method that acts as a field (property), if the property falls below zero the game object is desotryed
     public float shieldLevel
@@ -59,7 +60,8 @@ public class Hero : MonoBehaviour
         get { return (_shieldLevel); }
         set
         {
-            _shieldLevel = Mathf.Min(value, 4);
+            _shieldLevel = Mathf.Min(value, maxShield); //Min returns the smallest of the values, therby making max sheilds 4
+
             //if the sheild is going to be set to less than zero
             if (value < 0)
             {
@@ -84,7 +86,6 @@ public class Hero : MonoBehaviour
     private void Start()
     {
         gm = GameManager.GM; //find the game manager
-
     }//end Start()
 
         // Update is called once per frame (page 551)
@@ -131,6 +132,12 @@ public class Hero : MonoBehaviour
             Debug.Log("Triggered by non-enemy " + go.name);//get the name of the other object
         }//end if(go.tag == "Enemy")
 
-    }
+        if (go.tag == "Power Up")
+        {
+            Debug.Log("Power UP");//get name of enemy
+            shieldLevel++; //reduce sheilds
+        }
+
+        }//end OnTriggerEnter()
 
 }
