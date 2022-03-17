@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
     private int numberOfLives; //set number of lives in the inspector
     [Tooltip("Does the level get reset when a life is lost")]
     public bool resetLostLevel; //reset the lost level
+    public float gameRestartDelay = 2f; //the amount of delay before restart
     static public int lives; // number of lives for player 
     public int Lives { get { return lives; } set { lives = value; } }//access to static variable lives [get/set methods]
 
@@ -131,6 +132,15 @@ public class GameManager : MonoBehaviour
         GetHighScore();
 
     }//end Awake()
+
+
+    //Start is called once before the update
+    void Start()
+    {
+        //if we run play the game from the level instead of start scene
+        if (currentSceneName != startScene) { SetDefaultGameStats(); }
+
+    }//end Start()
 
 
     // Update is called once per frame
@@ -211,7 +221,7 @@ public class GameManager : MonoBehaviour
         //store the current scene
         currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
-
+        
         //SET ALL GAME LEVEL VARIABLES FOR START OF GAME
         lives = numberOfLives; //set the number of lives
         score = 0; //set starting score
@@ -275,6 +285,12 @@ public class GameManager : MonoBehaviour
 
     }//end NextLevel()
 
+    //Delayed Restart
+    public void DelayedRestart()
+    {
+        Invoke("StartGame", gameRestartDelay); 
+    }
+
 
     //PLAYER LOST A LIFE
     public void LostLife()
@@ -291,7 +307,7 @@ public class GameManager : MonoBehaviour
             //if this level resets when life is lost
             if (resetLostLevel){
                 numberOfLives = lives; //set lives left for level reset
-                StartGame(); //restart the level
+                DelayedRestart(); //restart the level
             }//end if (resetLostLevel)
 
         } // end elseif

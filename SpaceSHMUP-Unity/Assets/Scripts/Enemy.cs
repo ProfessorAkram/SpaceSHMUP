@@ -46,10 +46,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //move method
+        Move();
 
         //Check if bounds check exists and the object is off the bottom of the screne
-        if(bndCheck != null && !bndCheck.offDown)
+        if(bndCheck != null && bndCheck.offDown)
         {
               Destroy(gameObject); //destory the object
 
@@ -58,5 +58,11 @@ public class Enemy : MonoBehaviour
 
     }//end Update()
 
-    //Virtual Parent method
+    //Virtual methods can be overiden by child instances
+    public virtual void Move()
+    {
+        Vector3 temPos = pos; //temporay position
+        temPos.y -= speed * Time.deltaTime; //temporay y postion , moving down
+        pos = temPos; //position is equal to tempary positon
+    }//end Move()
 }
