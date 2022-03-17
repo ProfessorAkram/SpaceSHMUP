@@ -86,15 +86,8 @@ public class BoundsCheck : MonoBehaviour
 
     }//end LateUpdate
 
-    //Draw the bounds in the cene pane
-    private void OnDrawGizmos()
-    {
-        if (!Application.isPlaying) return;  //when the editor is not in playmode exit
+    //Draw the bounds in the scene pane
 
-        Vector3 boundSize = new Vector3(camWidth * 2, camHeight * 2, 0.1f); //set the boundary size
-        Gizmos.color = Color.yellow;//sets draw color to yellow
-        Gizmos.DrawWireCube(Vector3.zero, boundSize); //set the wire cube based on boundary size
-    }//end OnDrawGizmos()
 
 
 

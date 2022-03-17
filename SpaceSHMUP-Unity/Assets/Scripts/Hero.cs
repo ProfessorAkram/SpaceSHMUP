@@ -92,19 +92,7 @@ public class Hero : MonoBehaviour
         void Update()
     {
 
-        float xAxis = Input.GetAxis("Horizontal");
-        float yAxis = Input.GetAxis("Vertical");
-
-        //Change the transform based on the axis
-        Vector3 pos = transform.position;
-
-        pos.x += xAxis * speed * Time.deltaTime;
-        pos.y += yAxis * speed * Time.deltaTime;
-
-        transform.position = pos;
-
-        //Rotate the ship to make it feel more dynamic
-        transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0); 
+        //player input
 
     }//end Update()
 
@@ -112,32 +100,9 @@ public class Hero : MonoBehaviour
     //Taking Damage
     private void OnTriggerEnter(Collider other)
     {
-        Transform rootT = other.gameObject.transform.root;
-        //tranform root returns the topmost tranfrom in the hierachy, if there is no parent object it returns itself. 
+  
 
-        GameObject go = rootT.gameObject;//get the game object of the parent transform
-        
 
-        //OnTriggerEnter runs as long as the objects are in the same colider space. The if statment checks to see if we are still referening the same object, then do nothing. Only on the intial enter do we want the method to run. 
-        if (go == lastTriggerGo) { return; }
-     
-        lastTriggerGo = go; //set the trigger to the last trigger
-
-        if(go.tag == "Enemy")
-        {
-            Debug.Log("Triggered by enemy " + go.name);//get name of enemy
-            shieldLevel--; //reduce sheilds
-            Destroy(go); //destory enemy 
-        }else{
-            Debug.Log("Triggered by non-enemy " + go.name);//get the name of the other object
-        }//end if(go.tag == "Enemy")
-
-        if (go.tag == "Power Up")
-        {
-            Debug.Log("Power UP");//get name of enemy
-            shieldLevel++; //reduce sheilds
-        }
-
-        }//end OnTriggerEnter()
+    }//end OnTriggerEnter()
 
 }
