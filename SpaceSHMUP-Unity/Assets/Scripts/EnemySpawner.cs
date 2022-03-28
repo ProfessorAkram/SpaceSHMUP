@@ -1,21 +1,11 @@
 /**** 
-<<<<<<< Updated upstream
  * Created by: Your Name
- * Date Created: March 16, 2022
+ * Date Created: March 28 2022
  * 
  * Last Edited by: NA
  * Last Edited: March 16, 2022
  * 
  * Description: Spawns eniemes
-=======
- * Created by: Stu Dent
- * Date Created: March 28, 2022
- * 
- * Last Edited by: NA
- * Last Edited: March 28, 2022
- * 
- * Description: Spawn the enemies on screne
->>>>>>> Stashed changes
 ****/
 
 /** Using Namespaces **/
