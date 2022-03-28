@@ -2,8 +2,8 @@
  * Created by: Akram Taghavi-Burris
  * Date Created: March 16, 2022
  * 
- * Last Edited by: NA
- * Last Edited: March 16, 2022
+ * Last Edited by: Stu Dent
+ * Last Edited: March 28, 2022
  * 
  * Description: Enemy controler
 ****/
@@ -61,8 +61,9 @@ public class Enemy : MonoBehaviour
     //Virtual methods can be overiden by child instances
     public virtual void Move()
     {
-        Vector3 temPos = pos; //temporay position
-        temPos.y -= speed * Time.deltaTime; //temporay y postion , moving down
-        pos = temPos; //position is equal to tempary positon
+        Vector3 temPos = pos; //temporary position
+        temPos.y -= speed * Time.deltaTime; //move temp position
+        pos = temPos; //postion is eqaul to temporay position
     }//end Move()
+
 }

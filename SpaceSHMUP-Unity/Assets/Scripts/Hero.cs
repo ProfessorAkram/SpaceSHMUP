@@ -2,8 +2,8 @@
  * Created by: Your Name
  * Date Created: March 16, 2022
  * 
- * Last Edited by: NA
- * Last Edited: March 16, 2022
+ * Last Edited by: Stu Dent
+ * Last Edited: March 28, 2022
  * 
  * Description: Hero ship controller
 ****/
@@ -113,7 +113,25 @@ public class Hero : MonoBehaviour
     //Taking Damage
     private void OnTriggerEnter(Collider other)
     {
-  
+        Transform rootT = other.gameObject.transform.root;
+        //tranform root returens the topmost transfrom in the hierarchy (i.e. parent)
+
+        GameObject go = rootT.gameObject; //game object of parent transform
+
+        if(go == lastTriggerGo) { return;  }
+
+        lastTriggerGo = go; //set the trigger to the last trigger
+
+        if(go.tag == "Enemy")
+        {
+            Debug.Log("Triggered by Enemy " + go.name);
+            shieldLevel--; //reduce sheilds
+            Destroy(go);
+        }
+        else
+        {
+            Debug.Log("Triggered by non-Enemy " + go.name);
+        }
 
 
     }//end OnTriggerEnter()
