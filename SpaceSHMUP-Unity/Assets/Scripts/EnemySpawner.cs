@@ -26,7 +26,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     /*** VARIABLES ***/
-<<<<<<< Updated upstream
+
     public GameObject[] prefabEnemies;//array of all enemey prefabs
     public float enemySpawnPerSecond;//enemey count to spawn per second
     public float enemyDefaultPadding; //padding postition of each enemy
@@ -34,58 +34,20 @@ public class EnemySpawner : MonoBehaviour
     private BoundsCheck bndCheck; //reference to the bounds check component
 
 
-
-=======
-    [Header("Enemy Settings")]
-    public GameObject[] prefabEnemeies; //prefabs for all enemies
-    public float enemySpawnPerSecond; //number of enemies to spawn per second
-    public float enemyDefaultPadding; //padding for position
-
-    private BoundsCheck bndCheck; 
->>>>>>> Stashed changes
-
     // Start is called before the first frame update
     void Start()
     {
-<<<<<<< Updated upstream
+
         bndCheck = GetComponent<BoundsCheck>();
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
-    }//end Start()
 
-    void SpawnEnemy()
-    {
-        // Pick a random Enemy prefab to instantiate
-        int ndx = Random.Range(0, prefabEnemies.Length);                    
-        GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);    
-
-        // Position the Enemy above the screen with a random x position
-        float enemyPadding = enemyDefaultPadding;                            
-        if (go.GetComponent<BoundsCheck>() != null)
-        {                        // e
-            enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
-        }
-
-        // Set the initial position for the spawned Enemy                   
-        Vector3 pos = Vector3.zero;
-        float xMin = -bndCheck.camWidth + enemyPadding;
-        float xMax = bndCheck.camWidth - enemyPadding;
-        pos.x = Random.Range(xMin, xMax);
-        pos.y = bndCheck.camHeight + enemyPadding;
-        go.transform.position = pos;
-
-        // Invoke SpawnEnemy() again
-        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
-=======
-        bndCheck = GetComponent<BoundsCheck>();//reference to Bounds Check component
-        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond); 
-        
     }//end Start()
 
     public void SpawnEnemy()
     {
         //pick a random enemy to instantiate
-        int ndx = Random.Range(0, prefabEnemeies.Length);
-        GameObject go = Instantiate<GameObject>(prefabEnemeies[ndx]);
+        int ndx = Random.Range(0, prefabEnemies.Length);
+        GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
 
         //Position the enemy above the screen with a random X positon
         float enemyPadding = enemyDefaultPadding; 
@@ -107,7 +69,5 @@ public class EnemySpawner : MonoBehaviour
         //invoke again
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond); 
 
-
->>>>>>> Stashed changes
     }//end SpawnEnemy()
 }
