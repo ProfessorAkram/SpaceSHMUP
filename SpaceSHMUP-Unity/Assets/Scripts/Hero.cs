@@ -93,6 +93,19 @@ public class Hero : MonoBehaviour
     {
 
         //player input
+        float xAxis = Input.GetAxis("Horizontal");
+        float yAxis = Input.GetAxis("Vertical");
+
+        //Change the transform based on the axis
+        Vector3 pos = transform.position;
+
+        pos.x += xAxis * speed * Time.deltaTime;
+        pos.y += yAxis * speed * Time.deltaTime;
+
+        transform.position = pos;
+
+        //Rotate the ship to make it feel more dynamic
+        transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
 
     }//end Update()
 
