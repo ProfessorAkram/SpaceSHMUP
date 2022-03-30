@@ -66,4 +66,22 @@ public class Enemy : MonoBehaviour
         pos = temPos; //postion is eqaul to temporay position
     }//end Move()
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject otherGo = collision.gameObject; 
+       
+        if(otherGo.tag == "Projectile Hero")
+        {
+            Debug.Log("Enemy hit by projectile " + otherGo.name);
+            Destroy(otherGo);
+            Hero.SHIP.AddToScore(score);//add to score
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("Enemy hit by non-projectile " + otherGo.name);
+        }//end if(otherGo.tag == "Projectile Hero")
+    }//end OnCollisionEnter()
+
 }
