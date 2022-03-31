@@ -46,8 +46,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       //Call the Move Method
-
+        //Call the Move Method
+        Move();
 
         //Check if bounds check exists and the object is off the bottom of the screne
         if(bndCheck != null && bndCheck.offDown)
@@ -59,7 +59,13 @@ public class Enemy : MonoBehaviour
 
     }//end Update()
 
-    
+
     //Virtual methods can be overiden by child instances
+    public virtual void Move()
+    {
+        Vector3 temPos = pos; //temporay position
+        temPos.y -= speed * Time.deltaTime; //temporay y postion , moving down
+        pos = temPos; //position is equal to tempary positon
+    }//end Move()
 
 }
