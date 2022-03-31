@@ -3,12 +3,12 @@
  * Date Created: Feb 23, 2022
  * 
  * Last Edited by: NA
- * Last Edited: Feb 26, 2022
+ * Last Edited: March 31, 2022
  * 
  * Description: Basic GameManager Template
 ****/
 
-/** Import Libraries **/
+/* Using Namespaces */
 using System; //C# library for system properties
 using System.Collections;
 using System.Collections.Generic;
@@ -16,10 +16,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement; //libraries for accessing scenes
 
 //Setting the enum outside the class allows for direct access by the enum (classes) name directly in other classes.
-public enum GameState { Title, Playing, BeatLevel, LostLevel, GameOver, Idle };//enum of game states (work like it's own class)
+public enum GameState { Title, Playing, BeatLevel, LostLevel, GameOver, Idle };
+//enum of game states (work like it's own class)
+
 public class GameManager : MonoBehaviour
 {
-    /*** VARIABLES ***/
+    /* VARIABLES */
 
     #region GameManager Singleton
     static private GameManager gm; //refence GameManager
@@ -63,10 +65,9 @@ public class GameManager : MonoBehaviour
     public int HighScore { get { return highScore; } set { highScore = value; } }//access to private variable highScore [get/set methods]
 
     [Space(10)]
-
-    //static vairables can not be updated in the inspector, however private serialized fileds can be
-    [SerializeField] //Access to private variables in editor
-    private int numberOfLives; //set number of lives in the inspector
+    
+    public int defaultsLives; //set number of lives in the inspector
+    private int currentLives; //number of lives remaining in level
     [Tooltip("Does the level get reset when a life is lost")]
     public bool resetLostLevel; //reset the lost level
     static public int lives; // number of lives for player 
@@ -132,6 +133,14 @@ public class GameManager : MonoBehaviour
 
     }//end Awake()
 
+    //Start is called once before the update
+    void Start()
+    {
+        //if we run play the game from the level instead of start scene
+        if (currentSceneName != startScene) { SetDefaultGameStats(); }
+
+    }//end Start()
+
 
     // Update is called once per frame
     private void Update()
@@ -161,7 +170,7 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Title:
-                //do nothing
+                currentLives = defaultsLives; //set current lives to default (inital) value
                 break;
 
             case GameState.Playing:
@@ -176,12 +185,15 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.LostLevel:
+                currentLives = defaultsLives; //reset current lives to default (inital) value
+
                 endMsg = looseMessage; //set loose message
                 GameOver(); //move to game over
                 break;
 
             case GameState.GameOver:
                 //do nothing
+
                 break;
 
             case GameState.Idle:
@@ -213,7 +225,7 @@ public class GameManager : MonoBehaviour
 
 
         //SET ALL GAME LEVEL VARIABLES FOR START OF GAME
-        lives = numberOfLives; //set the number of lives
+        lives = currentLives; //set the number of lives
         score = 0; //set starting score
 
         //set High Score
@@ -281,7 +293,7 @@ public class GameManager : MonoBehaviour
     {
         if (lives == 1) //if there is one life left and it is lost
         {
-            GameOver(); //game is over
+            SetGameState(GameState.LostLevel); //set the state to Lost Level
 
         } 
         else
@@ -289,8 +301,8 @@ public class GameManager : MonoBehaviour
             lives--; //subtract from lives reset level lost 
 
             //if this level resets when life is lost
-            if (resetLostLevel){
-                numberOfLives = lives; //set lives left for level reset
+            if (resetLostLevel){  
+                currentLives = lives; //set current lives to remaining for level reload
                 StartGame(); //restart the level
             }//end if (resetLostLevel)
 
@@ -333,7 +345,7 @@ public class GameManager : MonoBehaviour
         if (nextLevel) { nextLevel = false; NextLevel(); }
 
         //test for lossing level
-        if (levelLost) { levelLost = false; SetGameState(GameState.LostLevel); }
+        if (levelLost) { levelLost = false; LostLife(); }
 
         //test if player won
         if (playerWon) { playerWon = false;  SetGameState(GameState.BeatLevel); }
