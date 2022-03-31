@@ -8,7 +8,7 @@
  * Description: Basic GameManager Template
 ****/
 
-/* Using Namespaces */
+/*** Using Namespaces ***/
 using System; //C# library for system properties
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ public enum GameState { Title, Playing, BeatLevel, LostLevel, GameOver, Idle , T
 
 public class GameManager : MonoBehaviour
 {
-    /* VARIABLES */
+    /*** VARIABLES ***/
 
     #region GameManager Singleton
     static private GameManager gm; //refence GameManager
