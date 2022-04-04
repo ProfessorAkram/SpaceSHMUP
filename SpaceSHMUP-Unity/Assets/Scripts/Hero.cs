@@ -34,7 +34,7 @@ public class Hero : MonoBehaviour
         {
             Debug.LogError("Hero.Awake() - Attempeeted to assign second Hero.SHIP");
         }
-    }//end CheckGameManagerIsInScene()
+    }//end CheckSHIPIsInScene()
     #endregion
 
     GameManager gm; //reference to game manager
@@ -163,15 +163,16 @@ public class Hero : MonoBehaviour
 
     void FireProjectile()
     {
-        GameObject projectile = ProjectilePool.projectilesPool.GetProjectile(); 
-        if(projectile != null)
-        {
+        
+        GameObject projectile = ProjectilePool.projPool.GetProjectile(); 
+
             projectile.transform.position = transform.position;
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             rb.velocity = Vector3.up * projectileSpeed;
 
-            projectile.SetActive(true); 
-        }
+           // projectile.SetActive(true);
+            Debug.Log("projectile "+ projectile.activeSelf);
+
     }
 
     //Add to the Score
