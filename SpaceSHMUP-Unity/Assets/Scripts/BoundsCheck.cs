@@ -17,7 +17,7 @@ public class BoundsCheck : MonoBehaviour
 {
     /*** VARIABLES ***/
     [Header("Bounds Settings")]
-    public float radius = 1f;
+    public float radius = 1f;//the radius around the object to keep on screen
     public bool keepOnScreen = true; //does the object need to stay on screen
 
     [HideInInspector]
