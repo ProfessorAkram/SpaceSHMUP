@@ -505,7 +505,7 @@ MonoBehaviour:
   copyrightDate: Copyright 2022
   recordHighScore: 1
   defaultHighScore: 1000
-  defaultsLives: 3
+  defaultsLives: 0
   resetLostLevel: 1
   gameRestartDelay: 2
   defaultEndMessage: Game Over
@@ -1049,6 +1049,10 @@ PrefabInstance:
     - target: {fileID: 6650417068716629939, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650417068716629939, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
