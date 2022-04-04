@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
     }//end Update()
 
 
-    //Virtual methods can be overiden by child instances
+    //Virtual methods can be overridden by child instances
     public virtual void Move()
     {
         Vector3 temPos = pos; //temporay position
