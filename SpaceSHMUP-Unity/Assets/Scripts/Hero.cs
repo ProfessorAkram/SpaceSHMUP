@@ -117,7 +117,8 @@ public class Hero : MonoBehaviour
         //check for space bar (fire)
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TempFire();
+            //TempFire();
+            FireProjectile();
         }
 
 
@@ -158,6 +159,19 @@ public class Hero : MonoBehaviour
         projGo.transform.position = transform.position;
         Rigidbody rb = projGo.GetComponent<Rigidbody>();
         rb.velocity = Vector3.up * projectileSpeed;
+    }
+
+    void FireProjectile()
+    {
+        GameObject projectile = ProjectilePool.projectilesPool.GetProjectile(); 
+        if(projectile != null)
+        {
+            projectile.transform.position = transform.position;
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.up * projectileSpeed;
+
+            projectile.SetActive(true); 
+        }
     }
 
     //Add to the Score
