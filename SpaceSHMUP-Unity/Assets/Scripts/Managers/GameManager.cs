@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
 
             case GameState.GameOver:
                 //do nothing
-
+                currentLives = defaultsLives; //set current lives to default (inital) value
                 break;
 
             case GameState.Idle:

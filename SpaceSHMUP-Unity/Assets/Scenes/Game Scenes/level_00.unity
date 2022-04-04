@@ -505,7 +505,7 @@ MonoBehaviour:
   copyrightDate: Copyright 2022
   recordHighScore: 1
   defaultHighScore: 1000
-  defaultsLives: 0
+  defaultsLives: 3
   resetLostLevel: 1
   gameRestartDelay: 2
   defaultEndMessage: Game Over
