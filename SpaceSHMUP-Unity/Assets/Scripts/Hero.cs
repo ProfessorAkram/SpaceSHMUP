@@ -53,8 +53,8 @@ public class Hero : MonoBehaviour
     [SerializeField] //show in inspector
     private float _shieldLevel = 1; //level for shields
     public int maxShield = 4; //maximum shield level
-    
-    //method that acts as a field (property), if the property falls below zero the game object is desotryed
+
+    //method that acts as a field (property), if the property falls below zero the game object is destroyed
     public float shieldLevel
     {
         get { return (_shieldLevel); }
@@ -68,11 +68,11 @@ public class Hero : MonoBehaviour
                 Destroy(this.gameObject);
                 Debug.Log(gm.name);
                 gm.LostLife();
-                
-            }
+
+            }//end  if (value < 0)
 
         }
-    }
+    }//end shieldLevel
 
     /*** MEHTODS ***/
 

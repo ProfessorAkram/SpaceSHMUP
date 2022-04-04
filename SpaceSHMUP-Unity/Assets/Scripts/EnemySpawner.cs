@@ -5,7 +5,7 @@
  * Last Edited by: 
  * Last Edited:
  * 
- * Description: Spawn enemeies within boundary
+ * Description: Spawn enemies within the boundary
 ****/
 
 /*** Using Namespaces ***/
@@ -28,9 +28,9 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bndCheck = GetComponent<BoundsCheck>();
-        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
-    }
+        bndCheck = GetComponent<BoundsCheck>(); //reference to BoundsCheck compement
+        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond); //call SpawnEnemy method after time delay. 
+    }//end Start()
 
 
     void SpawnEnemy()
@@ -53,8 +53,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
 
-        //Set the intial position 
-
+        //Set the initial position 
         Vector3 pos = Vector3.zero;
         float xMin = -bndCheck.camWidth + enemyPadding;
         float xMax = bndCheck.camWidth - enemyPadding;
