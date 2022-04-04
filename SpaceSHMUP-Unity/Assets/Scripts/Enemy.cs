@@ -60,6 +60,6 @@ public class Enemy : MonoBehaviour
     }//end Update()
 
     
-    //Virtual methods can be overiden by child instances
+    //Virtual methods can be overridden by child instances
 
 }
