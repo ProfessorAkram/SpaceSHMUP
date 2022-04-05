@@ -38,12 +38,12 @@ public class ProjectilePool : MonoBehaviour
 #endregion
 
 
-    [HideInInspector]
-    public List<GameObject> projecitles;
+    
+    private Queue<GameObject> projecitles = new Queue<GameObject>();
 
     [Header("Pool Settings")]
     public GameObject projectilePrefab;
-    public int projectileAmount;
+    public int projectileAmount = 5;
 
     //Awake is called when the game loads (before Start).  Awake only once during the lifetime of the script instance.
     void Awake()
@@ -55,38 +55,43 @@ public class ProjectilePool : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        projecitles = new List<GameObject>();
         
 
         for(int i = 0; i < projectileAmount; i++)
         {
-            GameObject projectileInstance = Instantiate(projectilePrefab); //create prefab instance
-            projectileInstance.SetActive(false); //set instance to inactive
-            projecitles.Add(projectileInstance); //add object to list
+            GameObject projectileGO = Instantiate(projectilePrefab); //create prefab instance
+            projecitles.Enqueue(projectileGO); //add to queue
+            projectileGO.SetActive(false);//hide projectile
         }
 
 
 
     }//end Start()
 
-    
+
     public GameObject GetProjectile()
     {
-      
-        foreach (GameObject projectile in projecitles)
+        if (projecitles.Count > 0)
         {
-            
-            //if the object is not active in the scene
-            if (!projectile.activeInHierarchy)
-            {  Debug.Log("GetProjectile");
-                projectile.SetActive(true);//make the projectile active
-                return projectile;  //return the object
-            }
-
+            GameObject projectileGO = projecitles.Dequeue();
+            projectileGO.SetActive(true);
+            return projectileGO;
         }
-        GameObject projectileInstance = Instantiate(projectilePrefab); //create prefab instance
-        projecitles.Add(projectileInstance); //add object to list
-        return projectileInstance;  //return the object
+        else
+        {
+            GameObject projectileGO = Instantiate(projectilePrefab); //create prefab instance
+            return projectileGO; 
+        }
 
     }//end GetProjectile()
+
+    public void ReturnProjectile(GameObject projectileGO)
+    {
+
+    projecitles.Enqueue(projectileGO); //add to queue
+
+        
+        projectileGO.SetActive(false);
+        Debug.Log("return " + projecitles.Count);
+    }//end ReturnProjectile()
 }
