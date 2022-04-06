@@ -28,7 +28,7 @@ public class PoolReturn : MonoBehaviour
         //if the pool is not empty
          if ( pool != null)
          { 
-            pool.ReturnProjectile(this.gameObject); //return to pool 
+            pool.ReturnObject(this.gameObject); //return to pool 
 
          }//end if ( pool != null)
 

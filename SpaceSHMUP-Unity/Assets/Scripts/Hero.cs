@@ -155,33 +155,20 @@ public class Hero : MonoBehaviour
     }//end OnTriggerEnter()
 
     //Shoot projectile
-  /*  void TempFire()
-    {
-        GameObject projGo = Instantiate<GameObject>(projectilePrefab);
-        projGo.transform.position = transform.position;
-        Rigidbody rb = projGo.GetComponent<Rigidbody>();
-        rb.velocity = Vector3.up * projectileSpeed;
-    }*/
-
     void FireProjectile()
     {
         
-        GameObject projectile = pool.GetProjectile(); //get object from pool
+        GameObject projectile = pool.GetObject(); //get object from pool
        
         //if there is a projectile object
         if(projectile != null)
         {
-            projectile.transform.position = transform.position; //set position
-            Rigidbody rb = projectile.GetComponent<Rigidbody>(); //get rigidbody
+            projectile.transform.position = transform.position; //set position to the ships position
+            Rigidbody rb = projectile.GetComponent<Rigidbody>(); //get rigidbody of the projectile
             rb.velocity = Vector3.up * projectileSpeed; //use velocity to move projectile
         }//end if(projectile != null)
 
     }//end FireProjectile()
 
-    //Add to the Score
-    public void AddToScore(int value)
-    {
-        gm.UpdateScore(value);
-    }//end AddToScore()
 
 }

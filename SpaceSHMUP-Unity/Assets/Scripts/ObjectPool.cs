@@ -5,7 +5,7 @@
  * Last Edited by: Stu Dent
  * Last Edited: April 1, 2022
  * 
- * Description: Pool for the projectiles
+ * Description: Creates a pool of objects for reuse
 ****/
 
 /** Using Namespaces **/
@@ -32,14 +32,14 @@ public class ObjectPool : MonoBehaviour
         }
         else //else if SHIP is not null send an error
         {
-            Debug.LogError("ProjectilePool.Awake() - Attempeeted to assign second ProjectilePool.projPool");
+            Debug.LogError("POOL.Awake() - Attempeeted to assign second ObjectPool.POOL");
         }
     }//end CheckSHIPIsInScene()
 #endregion
 
 
     
-    private Queue<GameObject> projecitles = new Queue<GameObject>(); //the queue for the projectiles
+    private Queue<GameObject> projectiles = new Queue<GameObject>(); //the queue for the projectiles
 
     [Header("Pool Settings")]
     public GameObject projectilePrefab;
@@ -56,41 +56,37 @@ public class ObjectPool : MonoBehaviour
     void Start()
     {
         
-
         for(int i = 0; i < poolStartSize; i++)
         {
-            GameObject projectileGO = Instantiate(projectilePrefab); //create prefab instance
-            projecitles.Enqueue(projectileGO); //add to queue
-            projectileGO.SetActive(false);//hide projectile
-            
-            
-        }
+            GameObject gObject = Instantiate(projectilePrefab); //create prefab instance
+            projectiles.Enqueue(gObject); //add to queue
+            gObject.SetActive(false);//hide projectile
 
-
+        }//end for(int i = 0; i < poolStartSize; i++)
 
     }//end Start()
 
 
-    public GameObject GetProjectile()
+    public GameObject GetObject()
     {
         //If there are objects in the pool
-        if(projecitles.Count > 0)
+        if(projectiles.Count > 0)
         {
-            GameObject projectileGO = projecitles.Dequeue(); //remove from queue
-            projectileGO.SetActive(true); //enable 
-            return projectileGO; //return object
+            GameObject gObject = projectiles.Dequeue(); //remove from queue
+            gObject.SetActive(true); //enable 
+            return gObject; //return object
         }
         else
         {
-            GameObject projectileGO = Instantiate(projectilePrefab); //create prefab instance if none are in queue
-            return projectileGO; //return object
+            Debug.LogWarning("Out of objects, reloading...");
+            return null; //return null
         }//end if(projecitles.Count > 0)
 
     }//end GetProjectile()
 
-    public void ReturnProjectile(GameObject projectileGO)
+    public void ReturnObject(GameObject gObject)
     {
-        projecitles.Enqueue(projectileGO); //add back to queue
-        projectileGO.SetActive(false); //disable
+        projectiles.Enqueue(gObject); //add back to queue
+        gObject.SetActive(false); //disable
     }//end ReturnProjectile()
 }
