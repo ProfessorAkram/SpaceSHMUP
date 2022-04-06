@@ -915,7 +915,7 @@ GameObject:
   - component: {fileID: 1045786828}
   - component: {fileID: 1045786827}
   m_Layer: 0
-  m_Name: ProjectilePool
+  m_Name: ObjectPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,9 +933,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e02165ec2494f42b445b2bb7b7d0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projecitles: []
   projectilePrefab: {fileID: 3887478425182159854, guid: 723dbfa6244668b45ae208b61285a730, type: 3}
-  projectileAmount: 5
+  poolStartSize: 5
 --- !u!4 &1045786828
 Transform:
   m_ObjectHideFlags: 0

@@ -14,11 +14,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectilePool : MonoBehaviour
+public class ObjectPool : MonoBehaviour
 {
 
     /* VARIABLES */
-    static public ProjectilePool projPool;
+    static public ObjectPool POOL;
 
     #region Pool Singleton
     //Check to make sure only one gm of the GameManager is in the scene
@@ -26,9 +26,9 @@ public class ProjectilePool : MonoBehaviour
     {
 
         //Check if instnace is null
-        if (projPool == null)
+        if (POOL == null)
         {
-            projPool = this; //set SHIP to this game object
+            POOL = this; //set SHIP to this game object
         }
         else //else if SHIP is not null send an error
         {
@@ -39,11 +39,11 @@ public class ProjectilePool : MonoBehaviour
 
 
     
-    private Queue<GameObject> projecitles = new Queue<GameObject>();
+    private Queue<GameObject> projecitles = new Queue<GameObject>(); //the queue for the projectiles
 
     [Header("Pool Settings")]
     public GameObject projectilePrefab;
-    public int projectileAmount = 5;
+    public int poolStartSize = 5;
 
     //Awake is called when the game loads (before Start).  Awake only once during the lifetime of the script instance.
     void Awake()
@@ -57,11 +57,13 @@ public class ProjectilePool : MonoBehaviour
     {
         
 
-        for(int i = 0; i < projectileAmount; i++)
+        for(int i = 0; i < poolStartSize; i++)
         {
             GameObject projectileGO = Instantiate(projectilePrefab); //create prefab instance
             projecitles.Enqueue(projectileGO); //add to queue
             projectileGO.SetActive(false);//hide projectile
+            
+            
         }
 
 
@@ -71,27 +73,24 @@ public class ProjectilePool : MonoBehaviour
 
     public GameObject GetProjectile()
     {
-        if (projecitles.Count > 0)
+        //If there are objects in the pool
+        if(projecitles.Count > 0)
         {
-            GameObject projectileGO = projecitles.Dequeue();
-            projectileGO.SetActive(true);
-            return projectileGO;
+            GameObject projectileGO = projecitles.Dequeue(); //remove from queue
+            projectileGO.SetActive(true); //enable 
+            return projectileGO; //return object
         }
         else
         {
-            GameObject projectileGO = Instantiate(projectilePrefab); //create prefab instance
-            return projectileGO; 
-        }
+            GameObject projectileGO = Instantiate(projectilePrefab); //create prefab instance if none are in queue
+            return projectileGO; //return object
+        }//end if(projecitles.Count > 0)
 
     }//end GetProjectile()
 
     public void ReturnProjectile(GameObject projectileGO)
     {
-
-    projecitles.Enqueue(projectileGO); //add to queue
-
-        
-        projectileGO.SetActive(false);
-        Debug.Log("return " + projecitles.Count);
+        projecitles.Enqueue(projectileGO); //add back to queue
+        projectileGO.SetActive(false); //disable
     }//end ReturnProjectile()
 }

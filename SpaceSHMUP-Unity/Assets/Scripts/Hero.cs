@@ -38,6 +38,7 @@ public class Hero : MonoBehaviour
     #endregion
 
     GameManager gm; //reference to game manager
+    ObjectPool pool;
 
     [Header("Ship Movement")]
     public float speed = 10;
@@ -47,7 +48,7 @@ public class Hero : MonoBehaviour
     [Space(10)]
 
     [Header("Projectile Settings")]
-    public GameObject projectilePrefab;
+   // public GameObject projectilePrefab;
     public float projectileSpeed = 40;
 
     [Space(10)]
@@ -91,6 +92,7 @@ public class Hero : MonoBehaviour
     private void Start()
     {
         gm = GameManager.GM; //find the game manager
+        pool = ObjectPool.POOL; //find the game manager
     }//end Start()
 
 
@@ -153,27 +155,28 @@ public class Hero : MonoBehaviour
     }//end OnTriggerEnter()
 
     //Shoot projectile
-    void TempFire()
+  /*  void TempFire()
     {
         GameObject projGo = Instantiate<GameObject>(projectilePrefab);
         projGo.transform.position = transform.position;
         Rigidbody rb = projGo.GetComponent<Rigidbody>();
         rb.velocity = Vector3.up * projectileSpeed;
-    }
+    }*/
 
     void FireProjectile()
     {
         
-        GameObject projectile = ProjectilePool.projPool.GetProjectile(); 
+        GameObject projectile = pool.GetProjectile(); //get object from pool
+       
+        //if there is a projectile object
+        if(projectile != null)
+        {
+            projectile.transform.position = transform.position; //set position
+            Rigidbody rb = projectile.GetComponent<Rigidbody>(); //get rigidbody
+            rb.velocity = Vector3.up * projectileSpeed; //use velocity to move projectile
+        }//end if(projectile != null)
 
-            projectile.transform.position = transform.position;
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.velocity = Vector3.up * projectileSpeed;
-
-           // projectile.SetActive(true);
-            Debug.Log("projectile "+ projectile.activeSelf);
-
-    }
+    }//end FireProjectile()
 
     //Add to the Score
     public void AddToScore(int value)

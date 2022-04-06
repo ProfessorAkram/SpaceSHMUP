@@ -15,20 +15,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
     /*** Variables***/
     private BoundsCheck bndCheck; //reference to the bounds check
-    ProjectilePool pool; 
+
     private void Awake()
     {
         bndCheck = GetComponent<BoundsCheck>();
     }//end Awake()
-
-    //Start is called once before the update
-    private void Start()
-    {
-        pool = ProjectilePool.projPool; //find the game manager
-    }//end Start()
 
     // Update is called once per frame
     void Update()
@@ -38,19 +31,8 @@ public class Projectile : MonoBehaviour
         {
             //Destroy(gameObject);
             gameObject.SetActive(false); //set the project to deactivate and return to pool
+            bndCheck.offUp = false;
         }
     }//end Update()
-
-    private void OnDisable()
-    {
-        Debug.Log("disabled");
-
-        if ( pool != null)
-        {
-           
-            pool.ReturnProjectile(this.gameObject); 
-        }
-    }//end OnDisable()
-
 
 }
