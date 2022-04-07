@@ -38,7 +38,7 @@ public class Hero : MonoBehaviour
     #endregion
 
     GameManager gm; //reference to game manager
-    ObjectPool pool;
+    ObjectPool pool; //refence to Object Pool
 
     [Header("Ship Movement")]
     public float speed = 10;
@@ -48,7 +48,7 @@ public class Hero : MonoBehaviour
     [Space(10)]
 
     [Header("Projectile Settings")]
-   // public GameObject projectilePrefab;
+    public GameObject projectilePrefab;
     public float projectileSpeed = 40;
 
     [Space(10)]
@@ -119,8 +119,7 @@ public class Hero : MonoBehaviour
         //check for space bar (fire)
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //TempFire();
-            FireProjectile();
+            FireProjectile();//call the FireProjectile method
         }
 
 

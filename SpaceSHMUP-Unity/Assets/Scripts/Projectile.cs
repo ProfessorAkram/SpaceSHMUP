@@ -26,12 +26,12 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if off screen up , destroy
+        //if off-screen up , destroy
         if (bndCheck.offUp)
         {
             //Destroy(gameObject);
             gameObject.SetActive(false); //set the project to deactivate and return to pool
-            bndCheck.offUp = false;
+            bndCheck.offUp = false;//reset the BoundsCheck offUp boolean
         }
     }//end Update()
 
