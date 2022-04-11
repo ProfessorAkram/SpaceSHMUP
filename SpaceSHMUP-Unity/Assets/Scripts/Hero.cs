@@ -38,7 +38,7 @@ public class Hero : MonoBehaviour
     #endregion
 
     GameManager gm; //reference to game manager
-    ObjectPool pool; //refence to Object Pool
+
 
     [Header("Ship Movement")]
     public float speed = 10;
@@ -92,7 +92,7 @@ public class Hero : MonoBehaviour
     private void Start()
     {
         gm = GameManager.GM; //find the game manager
-        pool = ObjectPool.POOL; //find the game manager
+  
     }//end Start()
 
 
