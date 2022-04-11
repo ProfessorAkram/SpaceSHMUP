@@ -80,8 +80,8 @@ public class GameManager : MonoBehaviour
     public int Score { get { return score; } set { score = value; } }//access to static variable score [get/set methods]
 
     [Space(10)]
-    public AudioClip backgroundMusicClip;
-    private AudioSource audioSource;
+    public AudioClip backgroundMusicClip; //sound clip for background music
+    private AudioSource audioSource; //reference to the audio source
 
     [Space(10)]
     public string defaultEndMessage = "Game Over";//the end screen message, depends on winning outcome
@@ -146,11 +146,11 @@ public class GameManager : MonoBehaviour
         //if background music exsists
         if (backgroundMusicClip != null)
         {
-            audioSource = gm.GetComponent<AudioSource>();
-            audioSource.volume = 0.5f;
-            audioSource.clip = backgroundMusicClip;
-            audioSource.loop = true;
-            audioSource.Play();
+            audioSource = gm.GetComponent<AudioSource>(); //reference to the Audio Source Component
+            audioSource.volume = 0.5f; //the volume level of the sound
+            audioSource.clip = backgroundMusicClip; //the music clip to play
+            audioSource.loop = true; //loop the music clip
+            audioSource.Play(); //play the clip 
         }//end if (backgroundMusicSource != null)
 
         //if we run play the game from the level instead of start scene (PLAYTESTING ONLY)
