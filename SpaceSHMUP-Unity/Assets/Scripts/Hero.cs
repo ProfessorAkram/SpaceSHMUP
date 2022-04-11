@@ -156,16 +156,12 @@ public class Hero : MonoBehaviour
     //Shoot projectile
     void FireProjectile()
     {
-        
-        GameObject projectile = pool.GetObject(); //get object from pool
-       
-        //if there is a projectile object
-        if(projectile != null)
-        {
-            projectile.transform.position = transform.position; //set position to the ships position
-            Rigidbody rb = projectile.GetComponent<Rigidbody>(); //get rigidbody of the projectile
-            rb.velocity = Vector3.up * projectileSpeed; //use velocity to move projectile
-        }//end if(projectile != null)
+
+        GameObject projectile = Instantiate<GameObject>(projectilePrefab); //instaniate the projectile
+        projectile.transform.position = transform.position; //set position to the ships position
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();//get the rigidbody of the projectile
+        rb.velocity = Vector3.up * projectileSpeed; //use velocity to move the projectile 
+      
 
     }//end FireProjectile()
 
