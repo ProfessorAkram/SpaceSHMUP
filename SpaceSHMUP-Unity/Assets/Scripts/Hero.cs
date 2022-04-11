@@ -48,10 +48,10 @@ public class Hero : MonoBehaviour
     [Space(10)]
 
     [Header("Projectile Settings")]
-    //public GameObject projectilePrefab;
-    public float projectileSpeed = 40;
-    public AudioClip projectSound; 
-        
+    public float projectileSpeed = 40; //spped of projectile
+    public AudioClip projectSound; //sound clip of projectile
+    private AudioSource audioSource; //the audio source of the game object
+
     private GameObject lastTriggerGo; //reference to the last triggering game object
     
     [Space(10)]
@@ -62,7 +62,7 @@ public class Hero : MonoBehaviour
     public int maxShield = 4; //maximum shield level
 
 
-    private AudioSource audioSource;
+   
 
     //method that acts as a field (property), if the property falls below zero the game object is destroyed
     public float shieldLevel
@@ -100,10 +100,6 @@ public class Hero : MonoBehaviour
         pool = ObjectPool.POOL; //find the game manager
         audioSource = GetComponent<AudioSource>(); //get refrence to audio source
         
-        if (audioSource.clip != null)
-        {
-            audioSource.Play();
-        }
     }//end Start()
 
 
@@ -131,13 +127,15 @@ public class Hero : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             FireProjectile();//call the FireProjectile method
-           
-            
-            if(audioSource != null)
+
+
+            //If there is an audio source            
+            if (audioSource != null)
             {
-                audioSource.PlayOneShot(projectSound);
+                audioSource.PlayOneShot(projectSound); //play projectileSound
             }
-            
+
+
         }
 
 
